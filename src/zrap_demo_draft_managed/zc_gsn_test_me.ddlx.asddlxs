@@ -1,0 +1,13 @@
+@Metadata.layer: #CUSTOMER
+annotate entity ZC_GSN_TEST
+    with 
+{
+
+  @UI: { lineItem:[ { position: 10, label: 'Test Item' } ],
+         identification: [{ position: 10, label: 'Test'}] }
+    
+    Testid;
+    @UI.identification: [{ position: 100 }]
+    ChangedAt;
+    
+}

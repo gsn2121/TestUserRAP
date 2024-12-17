@@ -1,0 +1,37 @@
+projection implementation in class zcl_c_gsn_test_bp unique;
+strict ( 2 );
+
+define behavior for ZC_GSN_TEST alias test
+{
+  use create ( augment );
+  use update ( augment );
+  use delete;
+
+  use association _question { create; }
+  use association _rating { create; }
+  use association _supplier { create; }
+}
+
+define behavior for ZC_GSN_QUES alias ques
+{
+  use update;
+  use delete;
+
+  use association _test;
+}
+
+define behavior for ZC_GSN_RATE alias rate
+{
+  use update;
+  use delete;
+
+  use association _test;
+}
+
+define behavior for ZC_GSN_SUPP alias supp
+{
+  use update;
+  use delete;
+
+  use association _test;
+}

@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZC_GSN_TEST'
+@ObjectModel.leadingEntity.name: 'ZC_GSN_TEST'
+define service ZC_GSN_TEST {
+  expose ZC_GSN_TEST    as Test;
+  expose ZC_GSN_BOOKING as Booking;
+}

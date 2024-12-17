@@ -1,0 +1,53 @@
+unmanaged implementation in class zcl_i_gsn_test_bp unique;
+strict ( 2 );
+
+define behavior for ZI_GSN_TEST alias test
+late numbering
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( precheck );
+  update;
+  delete;
+  field ( readonly ) Testid;
+  association _question { create; }
+  association _rating { create; }
+  association _supplier { create; }
+}
+
+define behavior for ZI_GSN_QUES alias ques
+late numbering
+lock dependent by _test
+authorization dependent by _test
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) questionid, Testid;
+  association _test;
+}
+
+define behavior for ZI_GSN_RATE alias rate
+late numbering
+lock dependent by _test
+authorization dependent by _test
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) Ratingid, Testid;
+  association _test;
+}
+
+define behavior for ZI_GSN_SUPP alias supp
+late numbering
+lock dependent by _test
+authorization dependent by _test
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) supplierid, Testid;
+  association _test;
+}

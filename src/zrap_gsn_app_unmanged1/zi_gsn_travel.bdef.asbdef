@@ -1,0 +1,63 @@
+unmanaged implementation in class zbp_i_gsn_travel unique;
+//managed implementation in class zbp_i_gsn_travel unique;
+strict ( 2 );
+
+define behavior for ZI_GSN_TRAVEL alias Travel
+implementation in class zbp_i_gsn_travel unique
+//late numbering
+lock master
+authorization master ( instance )
+etag master Lastchangedat
+{
+  create;
+  update;
+  delete;
+  association _Booking { create; }
+
+  field ( readonly ) TravelID;
+  field ( mandatory ) AgencyID, CustomerID, BeginDate, EndDate;
+
+  mapping for /dmo/travel control zsgsn_travel_x
+    {
+      TravelId      = travel_id;
+      AgencyId      = AGENCY_ID;
+      CustomerId    = CUSTOMER_ID;
+      BeginDate     = BEGIN_DATE;
+      EndDate       = END_DATE;
+      BookingFee    = BOOKING_FEE;
+      TotalPrice    = TOTAL_PRICE;
+      CurrencyCode  = CURRENCY_CODE;
+      Memo          = DESCRIPTION;
+      Status        = STATUS;
+      Createdby     = CREATEDBY;
+      Createdat     = CREATEDAT;
+      Lastchangedby = LASTCHANGEDBY;
+      Lastchangedat = LASTCHANGEDAT;
+    }
+}
+
+define behavior for ZI_GSN_BOOKING alias Booking
+implementation in class zbp_i_gsn_booking unique
+//late numbering
+lock dependent by _Travel
+authorization dependent by _Travel
+etag dependent
+{
+  update;
+  delete;
+  field ( readonly ) TravelId, BookingId;
+  field ( mandatory ) BookingDate, CustomerID, AirlineID, ConnectionID, FlightDate;
+  association _Travel;
+  mapping for /dmo/booking control zsgsn_booking_x
+    {
+      TravelId     = TRAVEL_ID;
+      BookingId    = BOOKING_ID;
+      BookingDate  = BOOKING_DATE;
+      CustomerId   = CUSTOMER_ID;
+      AirlineID    = CARRIER_ID;
+      ConnectionId = CONNECTION_ID;
+      FlightDate   = FLIGHT_DATE;
+      FlightPrice  = FLIGHT_PRICE;
+      CurrencyCode = CURRENCY_CODE;
+    }
+}

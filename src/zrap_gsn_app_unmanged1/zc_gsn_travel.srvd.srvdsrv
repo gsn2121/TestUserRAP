@@ -1,0 +1,8 @@
+@EndUserText.label: 'ZC_GSN_TRAVEL'
+@ObjectModel.leadingEntity.name: 'ZC_GSN_TRAVEL'
+define service ZC_GSN_TRAVEL {
+  expose ZC_GSN_TRAVEL  as Travel;
+
+
+  expose ZC_GSN_BOOKING as Booking;
+}
